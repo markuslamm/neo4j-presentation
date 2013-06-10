@@ -1,86 +1,488 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+<head>
+<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+<title>reveal.js - The HTML Presentation Framework</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+<meta name="description"
+	content="A framework for easily creating beautiful presentations using HTML">
+<meta name="author" content="Hakim El Hattab">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style"
+	content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+<link rel="stylesheet" href="css/reveal.min.css">
+<link rel="stylesheet" href="css/theme/default.css" id="theme">
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+<!-- For syntax highlighting -->
+<link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
-		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-		</script>
+<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+<script>
+	document.write('<link rel="stylesheet" href="css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper')
+			+ '.css" type="text/css" media="print">');
+</script>
 
-		<!--[if lt IE 9]>
+<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
-	</head>
+</head>
+<body>
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
 
-	<body>
+			<!-- Start page -->
+			<section>
+				<h1>Neo4j</h1>
+				<h3>Eine Graphendatenbank</h3>
+				<p>
+					<small><a href="http://twitter.com/markuse1501">Markus
+							Lamm</a> | s786697 | <a href="http://www.beuth-hochschule.de">Beuth
+							Hochschule für Technik Berlin</a></small>
+				</p>
+			</section>
 
-		<div class="reveal">
-
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-
+			<section>
 				<section>
-					<h1>Neo4j</h1>
-					<h3>a graph database</h3>
-					<p>
-						<small><a href="http://twitter.com/markuse1501">Markus Lamm</a> | s786697 | <a href="http://www.beuth-hochschule.de">Beuth Hochschule für Technik Berlin</a></small>
-					</p>
+					<h2>Veränderte Anforderungen</h2>
+					<ul>
+						<li>exponentiell steigend anfallenden Datenmengen</li>
+						<li>Twitter: 7 Terrabyte Daten täglich</li>
+						<li>Facebook: 25 Terrabyte Log-Daten täglich</li>
+						<li>weltweit gepeicherte digitale Daten 2011:<br /> 1800
+							Exabyte(10 ^18)
+						</li>
+					</ul>
+					<small>Quelle: Marktforschungsunternehmen IDC, Java Magazin
+						04.12</small>
+				</section>
+				<section>
+					<ul>
+						<li>immer stärker werdende Vernetzung der Daten, hypertext,
+							rss, blogs, wikis, social networks</li>
+						<li>Website als Graph aus Dokumenten und Links</li>
+						<li>Auflösung von Strukturen der Daten durch user generated
+							content(videos, fotos, Dokumente), semi-strukturiert</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>NoSQL</h2>
+				</section>
+				<section>
+					<ul>
+						<li>"Not only SQL"</li>
+						<li>keine eindeutige Definition</li>
+						<li>nicht-relationale Datenspeicher</li>
+					</ul>
+				</section>
+				<section>
+					<h2>NoSQL-Typen</h2>
+				</section>
+				<section>
+					<h3>Key-Value-Store</h3>
+					<small>(BerkeleyDB, Redis)</small>
+					<ul>
+						<li>einfachste NoSQL-Technologie</li>
+						<li>konkurrierender Zugriff auf großes Datenvolumen</li>
+						<li>Caching als typischer Use-Case</li>
+						<li>Daten werden in großen Hash-Tabellen gespeichert, Zugriff
+							über Schlüssel</li>
+						<li>kaum komplexe Datenstrukturen möglich</li>
+						<li>jedoch leichte Verteilung der Daten</li>
+					</ul>
+
+				</section>
+				<section>
+					<h3>Column-Family-Store</h3>
+					<small>(BigTable, Cassandra, Amazon SimpleDB, HBase)</small>
+					<ul>
+						<li>basieren auf Tabellen</li>
+						<li>mehrere Attribute pro Zeile</li>
+						<li>Attributname und -wert bilden Schlüssel-Wert-Paar -
+							Spalte, Column</li>
+						<li>kein festgelegtes Schema, Anzahl der Spalten variabel</li>
+						<li>keine Joins, leichte Verteilung</li>
+						<li>leading technologies - Google’s BigTable and Cassandra,
+							originally by Facebook</li>
+					</ul>
 				</section>
 
-				
+				<section>
+					<h3>Document-Store (CouchDB, MongoDB)</h3>
+					<ul>
+						<li>Speicherung in Form von semi-strukturierten
+							Dokumenten(JSON, XML)</li>
+						<li>schlechtere Performance und Skalierbarkeit</li>
+						<li>??</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Graph Database (Neo4j)</h3>
+					<ul>
+						<li>basiert auf den mathematischen Konzept der
+							Graphen-Theorie</li>
+						<li>Daten werden in Form Graphen gespeichert</li>
+						<li>optimiert für Traversierung von Graphen</li>
+						<li>besteht aus Knoten und Kanten, optional Properties</li>
+						<li>"Property-Graph"</li>
+					</ul>
+				</section>
+				<section>
+					<img alt="graph" src="img/property_graph_general.png"> <img
+						alt="graph" src="img/property_graph_example.png">
+				</section>
+				<section>
+					<h3>Knoten (Node, Vertex)</h3>
+					<ul>
+						<li>bilden die grundlegenden Einheiten eines Graphen</li>
+						<li>mit einer eindeutigen, fortlaufenden ID versehen</li>
+						<li>Eigenschaften, einfache Schlüssel/Werte-Paare</li>
+						<li>kein vorgegebenes Schema d.h. die verwendeten Schlüssel
+							können sich von Knoten zu Knoten unterscheiden</li>
+						<li>Flexibilisierung im Vergleich zu relationalen
+							Datenbanken, wo eigene Tabelle für jeden Knotentyp</li>
+					</ul>
+				</section>
 
-			</div>
+				<section>
+					<h3>Kanten (Relationship, Edge)</h3>
+					<ul>
+						<li>benannt, fortlaufenden ID</li>
+						<li>Start-Node und End-Node zwingend</li>
+						<li>gerichtet, X Fan von Y != Y Fan von X</li>
+						<li>Properties durch Schlüssel/Werte-Paare</li>
+						<li>Relationships sind Bestandteil der Daten, nicht teil
+							eines fixen Schemas</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Pfade (Paths)</h3>
+					<ul>
+						<li>Aneinandereihung mehrerer Knoten anhand von Kanten</li>
+						<li>Ergebnis von Suchanfragen an die Datenbank</li>
+					</ul>
+					<br /> <br />
+					<h3>Indices</h3>
+					<ul>
+						<li>Knoten und Kanten können jeweils anhand ihrer Eigenschaft
+							indiziert werden</li>
+						<li>Ergebnis von Suchanfragen an die Datenbank,
+							"Index-Lookup"</li>
+						<li>Lucene</li>
+					</ul>
+				</section>
+			</section>
 
+			<section>
+				<h3>Anwendungsgebiete</h3>
+				<ul>
+					<li>Social networks</li>
+					<li>Semantic Web</li>
+					<li>(Local) Recommendations</li>
+					<li>Geo-Processing</li>
+					<li>Network and Data Center Management</li>
+					<li>Routing (shortest path)</li>
+					<li>Search-Engines(Page-Rank)</li>
+					<li>Fraud-Detection</li>
+				</ul>
+			</section>
+			<section>
+				<section>
+					<h2>Cypher Query Language</h2>
+				</section>
+				<section>
+					<ul>
+						<li>deklarative Abfragesprache für Graphen, in Scala
+							implementiert</li>
+						<li>(einfachste) Abfragen bestehen aus START, MATCH und
+							RETURN</li>
+						<li>START: Ausgangspunkt ist einzelner oder Menge von Knoten
+							oder Beziehungen, Referenzierung durch ID oder Index-Lookup</li>
+						<li>MATCH: beschreibt Traversierung des Graphen, stellt einen
+							oder mehrere Pfade des Graphen dar</li>
+						<li>RETURN: welche Informationen werden aus dem gefundenen
+							Muster zurückgegeben</li>
+						<li>Filterung mit WHERE, Sortierung mit SORT, etc...</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Beispiele</h2>
+					<small>START a=node:user(name='Michael') MATCH (a)
+						-[:KNOWS]-> (b) -[:KNOWS]-> (c), (a) -[:KNOWS]-> (c) RETURN b, c</small> <br />
+					<br /> <small>START me=node:people(name='me') MATCH
+						me-[:knows]->friends-[:knows]-> new_friends WHERE new_friends.age
+						> 18 RETURN new_friends</small> <br /> <br /> <small>START
+						actor=node:Actors(lastname = 'Clooney') MATCH actor-[:ACTS_IN]->
+						movie <-[:ACTS_IN]-coactor RETURN movie.title, coactor.name</small> <br />
+					<br /> <small>START actor=node:Actors(lastname =
+						'Clooney') MATCH actor-[:ACTS_IN]-> movie <-[:ACTS_IN]-coactor
+						RETURN movie.title, coactor.name</small><br /> <br /> <small>START
+						user=node:Users(name = 'user1') MATCH user-[r:RATED]->movie RETURN
+						movie ORDER BY r.stars DESC LIMIT 10</small> <br /> <br /> <small>start
+						user=node:Users(name = 'me') match user-[:FRIEND]-> friend
+						-[r:RATED]->movie RETURN movie ORDER BY AVG(r.stars) DESC,
+						COUNT(*) DESC LIMIT 10</small>
+				</section>
+			</section>
+
+
+
+
+
+
+
+
+			<section>
+				<section>
+					<h2>Anwendungsbeispiel</h2>
+					<h3>ein soziales Netzwerk</h3>
+					<img src="img/social_graph.png" />
+				</section>
+				<section>
+					<h2>in relationaler Datenbank</h2>
+					<ul>
+						<li>typischerweise zwei Tabellen für Daten und Relationen</li>
+					</ul>
+					<img alt="relational data model"
+						src="img/relational_social_network.png">
+				</section>
+				<section>
+					<h3>direkte Freunde eines Benutzers</h3>
+					<p>
+						<code>select distinct uf.* from t_user_friend uf where
+							uf.user_1 = ?</code>
+					</p>
+					<br />
+					<h3>Freunde von Freunden eine Benutzers</h3>
+					<p>
+						<code>select distinct uf2.* from t_user_friend uf1 inner
+							join t_user_friend uf2 on uf1.user_1 = uf2.user_2 where
+							uf1.user_1 = ?</code>
+					</p>
+				</section>
+				<section>
+					<h3>Freunde von Freunden von Freunden eine Benutzers</h3>
+					<p>
+						<code>select distinct uf3.* from t_user_friend uf1 inner
+							join t_user_friend uf2 on uf1.user_1 = uf2.user_2 inner join
+							t_user_friend uf3 on uf2.user_1 = uf3.user_2 where uf1.user_1 = ?</code>
+					</p>
+					<ul>
+						<li>JOIN-Operation pro Ebene</li>
+						<li>bei großen Graphenstrukturen potentielle
+							Performance-Probleme</li>
+					</ul>
+				</section>
+				<section>
+					<h2>in Neo4j Graphdatenbank</h2>
+					<ul>
+						<li>speichert Daten als Nodes und Relationships</li>
+						<li>User als Nodes, Freundschaft als Relationship zwischen
+							User-Nodes</li>
+					</ul>
+					<img src="img/social_graph.png" />
+				</section>
+				<section>
+					<h3>direkte Freunde eines Benutzers</h3>
+					<p>
+						<code>START me=node:Users(name = 'me' MATCH
+							me-[:KNOWS]->friends RETURN friends</code>
+					</p>
+					<img src="img/social_graph_d1.png" />
+				</section>
+				<section>
+					<h3>Freunde von Freunden eine Benutzers</h3>
+					<p>
+						<code> START me=node:Users(name = 'me') MATCH
+							me-[:KNOWS]->friend-[:KNOWS]->friend2 WHERE
+							not(me-[:KNOWS]-friend2) RETURN DISTINCT friend2 ORDER BY
+							friend2.name"</code>
+
+					</p>
+					<img src="img/social_graph_d2.png" />
+				</section>
+				<section>
+					<h3>Freunde von Freunden von Freunden eine Benutzers</h3>
+					<p>
+						<code>START me=node:Users(name = 'me') MATCH
+							me-[:KNOWS]->friend-[:KNOWS]->friend2-[:KNOWS]->friend3 RETURN
+							DISTINCT friend3 ORDER BY friend3.name</code>
+					</p>
+					<img src="img/social_graph_d3.png" />
+				</section>
+				<section>
+					<h2>Alternativ: Graph-Traversals</h2>
+					<ul>
+
+						<li>mächtige und effiziente API zur Abfrage Graphen-basierte
+							Daten</li>
+						<li>fundamentale Operation: Durchlaufe eine Menge von Nodes,
+							folge den definierten Relationships, während die Kriterien
+							erfüllt sind</li>
+
+					</ul>
+
+				</section>
+
+				<section>
+					<code>
+						TraversalDescription traversalDescription =
+						Traversal.description()<br />.relationships(“IS_FRIEND_OF”,Direction.OUTGOING)
+						.evaluator(Evaluators.atDepth(2))
+						.uniqueness(Uniqueness.NODE_GLOBAL); Iterable nodes =
+						traversalDescription.traverse(nodeById).nodes();
+					</code>
+				</section>
+
+				<section>
+					<h3>Neu: Websites und Likes</h3>
+					<img src="img/social_graph_likes.png" />
+				</section>
+				<section>
+					<h3>Welcher Freund mag was?</h3>
+					<code>START me=node:Users(name = 'me') MATCH
+						me-[:KNOWS]->friends-[:LIKES]->websites RETURN websites.url,
+						friends</code>
+					<br /> <br />
+					<h3>Was wird am meisten von meinen Freunden gemocht?</h3>
+					<code>START me=node:Users(name = 'me') MATCH
+						me-[:KNOWS]->friends-[:LIKES]->websites RETURN websites.url,
+						COUNT(*) ORDER BY COUNT(*) DESC</code>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Experiment</h2>
+					<ul>
+						<li>Dataset 1000 User</li>
+						<li>jeder User durchnittlich 50 Freunde</li>
+						<li>t_user: 1000, t_user_friend 1000 X 50 = 50,000 records</li>
+					</ul>
+				</section>
+				<section>
+					<h3>...relational, Ebenen 2, 3, 4</h3>
+					<img alt="results" src="img/execution_time_table.png">
+					<ul>
+						<li>MySQL handles queries with depths 2 and 3 quite well</li>
+						<li>join operations are common in the relational world, most
+							databases engines are designed and tuned with this in mind</li>
+						<li>with depths 4 and 5, significant loss of performance</li>
+						<li>limitation of MySQL when modelling graph data – deep
+							graphs require multiple joins</li>
+					</ul>
+				</section>
+				<section>
+					<h3>...with graph traversal</h3>
+					<code>
+						TraversalDescription traversalDescription =<br />
+						Traversal.description()<br />
+						.relationships(“IS_FRIEND_OF”,Direction.OUTGOING)<br />
+						.evaluator(Evaluators.atDepth(1))<br />
+						.uniqueness(Uniqueness.NODE_GLOBAL);<br /> Iterable nodes =
+						traversalDescription.traverse(nodeById).nodes();
+					</code>
+					<img alt="result" src="img/social_graph_d1.png">
+				</section>
+				<section>
+					<h3>...</h3>
+					<img alt="results" src="img/execution_time_table_neo4j.png">
+					<ul>
+						<li>signifikant bessere Performance</li>
+						<li>Traversal von Freunden bis Ebene 4 vierfach schnelleer</li>
+						<li>Ebene 5: 10 Millionen mal schneller!!</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>now</h3>
+					<ul>
+						<li>t_user table: 1,000,000 records</li>
+						<li>t_user_friend: 1,000,000 X 50 = 50,000,000 records</li>
+						<li>gleiche Abfragen</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>relational</h3>
+					<img alt="result" src="img/execution_time_table2.png">
+					<ul>
+						<li>performance of depth-two query has stayed the same,
+							design of the MySQL engine to handle table joins efficiently
+							using indexes</li>
+						<li>depth 3 and 4 (3 and 4 join operations): worse results</li>
+						<li>query for all friends on depth 5 did not finish in one
+							hour</li>
+						<li>MySQL relational database is optimized for a single join
+							queries</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>...Neo4j</h3>
+					<img alt="result" src="img/execution_time_table_neo4j2.png">
+					<ul>
+						<li>performance of depth-two query has stayed the same,
+							design of the MySQL engine to handle table joins efficiently
+							using indexes</li>
+						<li>depth 3 and 4 (3 and 4 join operations): worse results</li>
+						<li>query for all friends on depth 5 did not finish in one
+							hour</li>
+						<li>MySQL relational database is optimized for a single join
+							queries</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<h3>Clever Quote</h3>
+				<img alt="result" src="img/stadium.png">
+			</section>
 		</div>
+	</div>
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.min.js"></script>
+	<script>
+		// Full list of configuration options available here:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({ controls : true, progress : true, history : true, center : true,
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+		theme : Reveal.getQueryHash().theme, // available themes are in /css/theme
+		transition : Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
-		<script>
-
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
-
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
-
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
-			});
-
-		</script>
-
-	</body>
+		// Optional libraries used to extend on reveal.js
+		dependencies : [ { src : 'lib/js/classList.js', condition : function() {
+			return !document.body.classList;
+		}
+		}, { src : 'plugin/markdown/marked.js', condition : function() {
+			return !!document.querySelector('[data-markdown]');
+		}
+		}, { src : 'plugin/markdown/markdown.js', condition : function() {
+			return !!document.querySelector('[data-markdown]');
+		}
+		}, { src : 'plugin/highlight/highlight.js', async : true, callback : function() {
+			hljs.initHighlightingOnLoad();
+		}
+		}, { src : 'plugin/zoom-js/zoom.js', async : true, condition : function() {
+			return !!document.body.classList;
+		}
+		}, { src : 'plugin/notes/notes.js', async : true, condition : function() {
+			return !!document.body.classList;
+		}
+		}
+		// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+		// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+		]
+		});
+	</script>
+</body>
 </html>
